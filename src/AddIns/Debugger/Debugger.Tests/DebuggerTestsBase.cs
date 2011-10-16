@@ -206,7 +206,12 @@ namespace Debugger.Tests
 				LogEvent("ModuleLoaded", e.Item.Name + (e.Item.HasSymbols ? " (Has symbols)" : " (No symbols)"));
 			};
 			process.Paused += delegate(object sender, ProcessEventArgs e) {
-				LogEvent("DebuggingPaused", e.Process.PauseSession.PausedReason.ToString() + " " + e.Process.SelectedStackFrame.NextStatement.ToString());
+				string text = string.Empty;
+				var statement = e.Process.SelectedStackFrame.NextStatement;
+				if (statement != null)
+					text = statement.ToString();
+				
+				LogEvent("DebuggingPaused", e.Process.PauseSession.PausedReason.ToString() + " " + text);
 			};
 //			process.DebuggingResumed += delegate(object sender, ProcessEventArgs e) {
 //				LogEvent("DebuggingResumed", e.Process.PausedReason.ToString());

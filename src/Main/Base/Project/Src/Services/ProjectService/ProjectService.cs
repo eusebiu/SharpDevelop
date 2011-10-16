@@ -528,9 +528,9 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// <summary>
 		/// Executes the OnBeforeSolutionClosing event.
 		/// </summary>
-		/// <remarks>This method must be used after CloseSolution is called.</remarks>
+		/// <remarks>This method must be used before CloseSolution is called.</remarks>
 		/// <returns><c>true</c>, if closing solution was canceled; <c>false</c>, otherwise.</returns>
-		internal static bool IsClosingCanceled()
+		public static bool IsClosingCanceled()
 		{
 			// run onbefore closing
 			var beforeClosingArgs = new SolutionCancelEventArgs(openSolution);
@@ -546,7 +546,7 @@ namespace ICSharpCode.SharpDevelop.Project
 		/// 	save solution and project data (e.g. files, bookmarks), then invoke CloseSolution().
 		/// </remarks>
 		/// </summary>
-		internal static void CloseSolution()
+		public static void CloseSolution()
 		{
 			// If a build is running, cancel it.
 			// If we would let a build run but unload the MSBuild projects, the next project.StartBuild call
